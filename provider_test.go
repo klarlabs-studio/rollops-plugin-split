@@ -18,7 +18,7 @@ func TestApplyFlag_PutsDefaultRuleBuckets(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		path, method, auth = r.URL.Path, r.Method, r.Header.Get("Authorization")
 		b, _ := io.ReadAll(r.Body)
-		json.Unmarshal(b, &body)
+		_ = json.Unmarshal(b, &body)
 		w.WriteHeader(200)
 	}))
 	defer srv.Close()
@@ -48,7 +48,7 @@ func TestApplyFlag_DisabledServesOff(t *testing.T) {
 	var body map[string]any
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		b, _ := io.ReadAll(r.Body)
-		json.Unmarshal(b, &body)
+		_ = json.Unmarshal(b, &body)
 		w.WriteHeader(200)
 	}))
 	defer srv.Close()
